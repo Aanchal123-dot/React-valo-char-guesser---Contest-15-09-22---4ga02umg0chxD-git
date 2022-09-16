@@ -133,11 +133,12 @@ const App = () => {
     const random2 = Math.floor(Math.random() * 19);
     const random3 = Math.floor(Math.random() * 19);
     const random4 = Math.floor(Math.random() * 19);
+
     const characterObj = {
       name: characters[random].name,
       role: characters[random].role,
       abilities: characters[random].abilities,
-      option: [
+      options: [
         characters[random],
         characters[random2],
         characters[random3],
@@ -147,14 +148,14 @@ const App = () => {
     console.log(characterObj);
     setCurrChar(characterObj);
   };
-
   const scoreHandler = (e) => {
     e.persist();
     console.log(e._targetInst.key);
+
     if (e._targetInst.key == 0) {
       setScore(score + 1);
     } else {
-      setScore(-1);
+      setScore(score - 1);
     }
     changeChar();
   };
@@ -164,11 +165,13 @@ const App = () => {
     const random2 = Math.floor(Math.random() * 19);
     const random3 = Math.floor(Math.random() * 19);
     const random4 = Math.floor(Math.random() * 19);
+
     const characterObj = {
       name: characters[random].name,
       role: characters[random].role,
       abilities: characters[random].abilities,
-      option: [
+
+      options: [
         characters[random],
         characters[random2],
         characters[random3],
@@ -190,8 +193,10 @@ const App = () => {
           <h4>Role: {currChar.role}</h4>
           {currChar.abilities.join()}
           <div className="options">
-            {currChar.options.map((option) => (
-              <button onClick={scoreHandler}>{option.name}</button>
+            {currChar.options.map((option, index) => (
+              <button onClick={(event) => scoreHandler(event)} key={index}>
+                {option.name}
+              </button>
             ))}
           </div>
         </div>
